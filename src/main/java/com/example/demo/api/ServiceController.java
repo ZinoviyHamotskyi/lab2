@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController(value = "/services")
+@RestController
 public class ServiceController {
     private final ServiceService serviceService;
 
@@ -17,23 +17,23 @@ public class ServiceController {
         this.serviceService = serviceService;
     }
 
-    @GetMapping
+    @GetMapping(value = "/services")
     public List<Service> getServices(){
         return serviceService.getServices();
     }
 
-    @GetMapping(value = "/{name}")
+    @GetMapping(value = "/services/{name}")
     public Service getServiceByName(@PathVariable(name = "name") String name){
         return serviceService.getServiceByName(name);
     }
 
-    @PostMapping
+    @PostMapping(value = "/services")
     public Service addNewService(@RequestParam String name,
                                  @RequestParam double price){
         return serviceService.addNewService(name, price);
     }
 
-    @DeleteMapping(value = "/{name}")
+    @DeleteMapping(value = "/services/{name}")
     public String deleteServiceByName(@PathVariable(name = "name") String name){
         return deleteServiceByName(name);
     }
