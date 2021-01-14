@@ -1,28 +1,32 @@
-package com.example.demo.service;
+package com.example.demo.service.Impl;
 
 import com.example.demo.repo.ClientRepo;
+import com.example.demo.service.ClientService;
 import com.example.demo.service.model.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.UUID;
 
 @Service
-public final class ClientService {
+public final class ClientServiceImpl implements ClientService {
     private final ClientRepo clientRepo;
 
     @Autowired
-    public ClientService(ClientRepo clientRepo) {
+    public ClientServiceImpl(ClientRepo clientRepo) {
         this.clientRepo = clientRepo;
     }
 
+    @Override
     public Client addNewClient(String name, String birthDate) throws ParseException {
         Client client = new Client(name, birthDate);
         clientRepo.save(client);
         return client;
     }
 
+    @Override
     public Client getClientByName(String name){
         Client client = clientRepo.getClientByName(name);
         if (client == null){
@@ -31,6 +35,7 @@ public final class ClientService {
         return client;
     }
 
+    @Override
     public List<Client> getClients(){
         List<Client> clients = clientRepo.findAll();
         if (clients == null){
@@ -39,6 +44,7 @@ public final class ClientService {
         return clients;
     }
 
+    @Override
     public String deleteClientByName(String name){
         Client client = clientRepo.getClientByName(name);
         if (client == null){
@@ -49,6 +55,14 @@ public final class ClientService {
             return "Client`s deleted";
     }
 
+    @Override
+    public UUID getId(String name){
+        Client client = clientRepo.getClientByName(name);
+        if (client == null){
+            System.out.println("Client list is empty");
+        }
+        return client.getId();
+    }
 
 }
 

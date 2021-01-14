@@ -37,8 +37,8 @@ public class ClientController {
         return ResponseEntity.ok(clientService.addNewClient(name, birthDate));
     }
 
-    @DeleteMapping(value = "/clients")
-    public ResponseEntity<String> deleteManagerByName(@RequestParam String name) {
+    @DeleteMapping(value = "/clients/{name}")
+    public ResponseEntity<String> deleteManagerByName(@PathVariable(name = "name") String name) {
         return ResponseEntity.ok(clientService.deleteClientByName(name));
     }
 
