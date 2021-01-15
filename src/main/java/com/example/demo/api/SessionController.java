@@ -45,14 +45,28 @@ public class SessionController {
 
 
     @GetMapping(value = "/clients/{name}/sessions")
-    public ResponseEntity<List<Session>> getSessionsbyClient(@PathVariable(name = "name") String clientName) {
+    public ResponseEntity<String> getSessionInfobyClient(@PathVariable(name = "name") String clientName) {
         UUID clientId = clientService.getId(clientName);
-        return ResponseEntity.ok(sessionService.getSessionsByClient(clientId));
+        List<Session> sessions = sessionService.getSessionsByClient(clientId);
+        String info = "";
+        for(Session session : sessions) {
+            info += sessionService.getOrdersInfo(session, serviceService.getServiceById(session.getService()),
+                    clientService.getClientById(session.getClient()),
+                    specialistService.getSprcialistById(session.getSpecialist()));
+        }
+        return ResponseEntity.ok(info);
     }
 
     @GetMapping(value = "/specialists/{name}/sessions")
-    public ResponseEntity<List<Session>> getSessionsbySpecialist(@PathVariable(name = "name") String specialistName) {
+    public ResponseEntity<String> getSessionInfobySpecialist(@PathVariable(name = "name") String specialistName) {
         UUID specialistId =  specialistService.getId(specialistName);
-        return ResponseEntity.ok(sessionService.getSessionsBySpecialist(specialistId));
+        List<Session> sessions = sessionService.getSessionsBySpecialist(specialistId);
+        String info = "";
+        for(Session session : sessions) {
+            info += sessionService.getOrdersInfo(session, serviceService.getServiceById(session.getService()),
+                    clientService.getClientById(session.getClient()),
+                    specialistService.getSprcialistById(session.getSpecialist()));
+        }
+        return ResponseEntity.ok(info);
     }
 }

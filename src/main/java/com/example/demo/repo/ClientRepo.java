@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface ClientRepo extends JpaRepository<Client, UUID> {
     Client getClientByName(String name);
-    List<Client> getClientById(UUID id);
+    Client getClientById(UUID id);
     void deleteByName(String name);
 
 }

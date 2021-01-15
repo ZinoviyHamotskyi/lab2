@@ -10,6 +10,7 @@ import java.util.UUID;
 public interface ServiceService {
     Service addNewService(String name, double price);
     Service getServiceByName(String name);
+    Service getServiceById(UUID id);
     List<Service> getServices();
     String deleteServiceByName(String name);
     UUID getId(String name);

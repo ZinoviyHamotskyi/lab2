@@ -64,6 +64,14 @@ public final class ClientServiceImpl implements ClientService {
         return client.getId();
     }
 
+    @Override
+    public Client getClientById(UUID id) {
+        Client client = clientRepo.getClientById(id);
+        if (client == null){
+            System.out.println("Client is not found");
+        }
+        return client;
+    }
 }
 
 

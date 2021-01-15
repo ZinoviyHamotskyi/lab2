@@ -17,5 +17,6 @@ public interface ClientService {
     List<Client> getClients();
     String deleteClientByName(String name);
     UUID getId(String name);
+    Client getClientById(UUID id);
 
 }

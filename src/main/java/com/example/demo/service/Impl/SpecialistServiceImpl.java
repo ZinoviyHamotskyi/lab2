@@ -67,4 +67,14 @@ public final class SpecialistServiceImpl implements SpecialistService {
         }
         return specialist.getId();
     }
+
+    @Override
+    public Specialist getSprcialistById(UUID id) {
+        Specialist specialist = specialistRepo.getSpecialistById(id);
+        if (specialist == null){
+            System.out.println("Specialist is not found");
+
+        }
+        return specialist;
+    }
 }

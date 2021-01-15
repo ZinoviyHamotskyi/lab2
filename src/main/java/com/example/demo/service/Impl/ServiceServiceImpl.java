@@ -62,4 +62,13 @@ public final class ServiceServiceImpl implements ServiceService {
         }
         return service.getId();
     }
+
+    @Override
+    public Service getServiceById(UUID id) {
+        Service service = serviceRepo.getServiceById(id);
+        if (service == null){
+            System.out.println("Service is not found");
+        }
+        return service;
+    }
 }

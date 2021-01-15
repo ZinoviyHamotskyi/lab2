@@ -14,4 +14,5 @@ public interface SpecialistService {
     List<Specialist> getSpecialists();
     String deleteSpecialistByName(String name);
     UUID getId(String name);
+    Specialist getSprcialistById(UUID id);
 }

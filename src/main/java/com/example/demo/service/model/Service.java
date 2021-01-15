@@ -35,4 +35,8 @@ public final class Service {
     public void setName(String name) {
         this.name = name;
     }
+
+    public double getPrice() {
+        return  price;
+    }
 }

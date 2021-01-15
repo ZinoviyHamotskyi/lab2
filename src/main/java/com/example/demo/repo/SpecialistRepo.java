@@ -10,4 +10,6 @@ import java.util.UUID;
 public interface SpecialistRepo extends JpaRepository<Specialist, UUID> {
     Specialist getSpecialistByName(String name);
     void deleteByName(String name);
+
+    Specialist getSpecialistById(UUID id);
 }
