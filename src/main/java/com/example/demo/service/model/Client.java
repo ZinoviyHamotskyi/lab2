@@ -22,6 +22,7 @@ public final class Client {
     private String name;
     private Date birthDate;
 
+
     public Client(String name, String birthDate) throws ParseException {
         id = UUID.randomUUID();
         this.name = name;

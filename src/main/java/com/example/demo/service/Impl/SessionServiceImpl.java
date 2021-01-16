@@ -20,19 +20,19 @@ public class SessionServiceImpl implements SessionService {
         this.sessionRepo = sessionRepo;
     }
 
-    public Session makeAppointment(UUID serviceId,
-                                   UUID clientId,
-                                   UUID specialistId,
-                                   String date){
-        Session session = new Session(serviceId, clientId,
-                specialistId, date);
+
+    @Override
+    public Session makeAppointment(com.example.demo.service.model.Service service,
+                                   Client client, Specialist specialist, String date) {
+        Session session = new Session(service, client,
+                specialist, date);
         sessionRepo.save(session);
         return session;
     }
 
     @Override
-    public List<Session> getSessionsBySpecialist(UUID id) {
-        return sessionRepo.getSessionsBySpecialist(id);
+    public List<Session> getSessionsBySpecialist(Specialist specialist) {
+        return sessionRepo.getSessionsBySpecialist(specialist);
     }
 
     @Override
@@ -47,9 +47,9 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public List<Session> getSessionsByClient(UUID id){
-        System.out.println(sessionRepo.getSessionsByClient(id).stream().findFirst().toString());
-        List<Session> sessions = sessionRepo.getSessionsByClient(id);
+    public List<Session> getSessionsByClient(Client client){
+        System.out.println(sessionRepo.getSessionsByClient(client).stream().findFirst().toString());
+        List<Session> sessions = sessionRepo.getSessionsByClient(client);
         return sessions;
     }
 }

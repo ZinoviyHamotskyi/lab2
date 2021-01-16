@@ -51,7 +51,7 @@ public final class ClientServiceImpl implements ClientService {
             return "Client is not found";
         }
         else
-            clientRepo.deleteByName(name);
+            clientRepo.delete(clientRepo.getClientByName(name));
             return "Client`s deleted";
     }
 

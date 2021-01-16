@@ -15,16 +15,24 @@ import java.util.UUID;
 public final class Session {
     @Id
     private UUID id;
-    private UUID service;
-    private UUID client;
-    private UUID specialist;
+
+    @ManyToOne
+    @JoinColumn(name = "service")
+    private Service service;
+
+    @ManyToOne
+    @JoinColumn(name = "client")
+    private Client client;
+
+    @ManyToOne
+    @JoinColumn(name = "specialist")
+    private Specialist specialist;
+
     private Date date;
     private boolean finished;
 
-
-    public Session(UUID service, UUID client,
-                   UUID specialist, String date) {
-
+    public Session(Service service, Client client,
+                   Specialist specialist, String date) {
         this.id = UUID.randomUUID();
         this.service = service;
         this.client = client;
@@ -37,15 +45,15 @@ public final class Session {
         }
     }
 
-    public UUID getService() {
+    public Service getService() {
         return service;
     }
 
-    public UUID getClient() {
+    public Client getClient() {
         return client;
     }
 
-    public UUID getSpecialist() {
+    public Specialist getSpecialist() {
         return specialist;
     }
 

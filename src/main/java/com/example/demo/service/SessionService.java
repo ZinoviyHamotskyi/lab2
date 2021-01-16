@@ -11,11 +11,11 @@ import java.util.UUID;
 
 @Service
 public interface SessionService {
-    Session makeAppointment(UUID serviceId, UUID clientId,
-                            UUID specialistId, String date);
+    Session makeAppointment(com.example.demo.service.model.Service serviceI,
+                            Client client, Specialist specialist, String date);
 
-    List<Session> getSessionsByClient(UUID id);
-    List<Session> getSessionsBySpecialist(UUID id);
+    List<Session> getSessionsByClient(Client client);
+    List<Session> getSessionsBySpecialist(Specialist specialist);
     String getOrdersInfo(Session session,
                          com.example.demo.service.model.Service service,
                          Client client,

@@ -36,36 +36,33 @@ public class SessionController {
                                                    @PathVariable(name = "name") String clientName,
                                                    @RequestParam String specialistName,
                                                    @RequestParam String date) {
-        UUID serviceId = serviceService.getId(serviceName);
-        UUID clientID = clientService.getId(clientName);
-        UUID specialistID = specialistService.getId(specialistName);
-        return ResponseEntity.ok(sessionService.makeAppointment(serviceId, clientID,
-                specialistID, date));
+        return ResponseEntity.ok(sessionService.makeAppointment(serviceService.getServiceByName(serviceName),
+                clientService.getClientByName(clientName),
+                specialistService.getSpecialistByName(specialistName),
+                date));
     }
 
 
     @GetMapping(value = "/clients/{name}/sessions")
     public ResponseEntity<String> getSessionInfobyClient(@PathVariable(name = "name") String clientName) {
-        UUID clientId = clientService.getId(clientName);
-        List<Session> sessions = sessionService.getSessionsByClient(clientId);
+        List<Session> sessions = sessionService.getSessionsByClient(clientService.getClientByName(clientName));
         String info = "";
         for(Session session : sessions) {
-            info += sessionService.getOrdersInfo(session, serviceService.getServiceById(session.getService()),
-                    clientService.getClientById(session.getClient()),
-                    specialistService.getSprcialistById(session.getSpecialist()));
+            info += sessionService.getOrdersInfo(session, session.getService(),
+                    session.getClient(),
+                    session.getSpecialist());
         }
         return ResponseEntity.ok(info);
     }
 
     @GetMapping(value = "/specialists/{name}/sessions")
     public ResponseEntity<String> getSessionInfobySpecialist(@PathVariable(name = "name") String specialistName) {
-        UUID specialistId =  specialistService.getId(specialistName);
-        List<Session> sessions = sessionService.getSessionsBySpecialist(specialistId);
+        List<Session> sessions = sessionService.getSessionsBySpecialist(specialistService.getSpecialistByName(specialistName));
         String info = "";
         for(Session session : sessions) {
-            info += sessionService.getOrdersInfo(session, serviceService.getServiceById(session.getService()),
-                    clientService.getClientById(session.getClient()),
-                    specialistService.getSprcialistById(session.getSpecialist()));
+            info += sessionService.getOrdersInfo(session, session.getService(),
+                    session.getClient(),
+                    session.getSpecialist());
         }
         return ResponseEntity.ok(info);
     }
