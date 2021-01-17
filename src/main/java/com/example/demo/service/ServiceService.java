@@ -8,10 +8,10 @@ import java.util.UUID;
 
 @org.springframework.stereotype.Service
 public interface ServiceService {
-    Service addNewService(String name, double price);
+    Service addNewService(Service service);
     Service getServiceByName(String name);
     Service getServiceById(UUID id);
     List<Service> getServices();
-    String deleteServiceByName(String name);
+    String deleteServiceById(UUID id);
     UUID getId(String name);
 }

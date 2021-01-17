@@ -11,6 +11,7 @@ import java.util.UUID;
 @EnableAutoConfiguration
 public final class Service {
     @Id
+    @GeneratedValue
     private UUID id;
     private String name;
     private double price;

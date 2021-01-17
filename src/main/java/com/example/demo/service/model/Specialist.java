@@ -11,6 +11,7 @@ import java.util.UUID;
 @EnableAutoConfiguration
 public final class Specialist {
     @Id
+    @GeneratedValue
     private UUID id;
     private String name;
     private boolean isFree;

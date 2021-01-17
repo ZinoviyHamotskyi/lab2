@@ -20,15 +20,13 @@ public final class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client addNewClient(String name, String birthDate) throws ParseException {
-        Client client = new Client(name, birthDate);
+    public void addNewClient(Client client) throws ParseException {
         clientRepo.save(client);
-        return client;
     }
 
     @Override
-    public Client getClientByName(String name){
-        Client client = clientRepo.getClientByName(name);
+    public Client getClientById(UUID id){
+        Client client = clientRepo.getClientById(id);
         if (client == null){
             System.out.println("Client is not found");
         }
@@ -45,13 +43,13 @@ public final class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public String deleteClientByName(String name){
-        Client client = clientRepo.getClientByName(name);
+    public String deleteClientById(UUID id){
+        Client client = clientRepo.getClientById(id);
         if (client == null){
             return "Client is not found";
         }
         else
-            clientRepo.delete(clientRepo.getClientByName(name));
+            clientRepo.delete(clientRepo.getClientById(id));
             return "Client`s deleted";
     }
 
@@ -64,14 +62,7 @@ public final class ClientServiceImpl implements ClientService {
         return client.getId();
     }
 
-    @Override
-    public Client getClientById(UUID id) {
-        Client client = clientRepo.getClientById(id);
-        if (client == null){
-            System.out.println("Client is not found");
-        }
-        return client;
-    }
+
 }
 
 

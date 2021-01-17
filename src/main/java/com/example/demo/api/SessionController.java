@@ -31,21 +31,21 @@ public class SessionController {
         this.specialistService = specialistService;
     }
 
-    @PostMapping(value = "/clients/{name}/sessions")
+    @PostMapping(value = "/clients/{id}/sessions")
     public ResponseEntity<Session> makeAppointment(@RequestParam String serviceName,
-                                                   @PathVariable(name = "name") String clientName,
-                                                   @RequestParam String specialistName,
+                                                   @PathVariable(name = "id") UUID id,
+                                                   @RequestParam String  specialistName,
                                                    @RequestParam String date) {
         return ResponseEntity.ok(sessionService.makeAppointment(serviceService.getServiceByName(serviceName),
-                clientService.getClientByName(clientName),
+                clientService.getClientById(id),
                 specialistService.getSpecialistByName(specialistName),
                 date));
     }
 
 
-    @GetMapping(value = "/clients/{name}/sessions")
-    public ResponseEntity<String> getSessionInfobyClient(@PathVariable(name = "name") String clientName) {
-        List<Session> sessions = sessionService.getSessionsByClient(clientService.getClientByName(clientName));
+    @GetMapping(value = "/clients/{id}/sessions")
+    public ResponseEntity<String> getSessionInfobyClient(@PathVariable(name = "id") UUID id) {
+        List<Session> sessions = sessionService.getSessionsByClient(clientService.getClientById(id));
         String info = "";
         for(Session session : sessions) {
             info += sessionService.getOrdersInfo(session, session.getService(),

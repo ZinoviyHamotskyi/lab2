@@ -11,11 +11,9 @@ import java.util.UUID;
 @Service
 public interface ClientService {
 
-    Client addNewClient(String name,
-                        String birthDate) throws ParseException;
-    Client getClientByName(String name);
+    void addNewClient(Client client) throws ParseException;
     List<Client> getClients();
-    String deleteClientByName(String name);
+    String deleteClientById(UUID id);
     UUID getId(String name);
     Client getClientById(UUID id);
 

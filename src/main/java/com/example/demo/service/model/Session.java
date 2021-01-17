@@ -14,6 +14,7 @@ import java.util.UUID;
 @EnableAutoConfiguration
 public final class Session {
     @Id
+    @GeneratedValue
     private UUID id;
 
     @ManyToOne

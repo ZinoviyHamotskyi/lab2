@@ -21,8 +21,7 @@ public final class SpecialistServiceImpl implements SpecialistService {
     }
 
     @Override
-    public Specialist addNewSpecialist(String name) {
-        Specialist specialist = new Specialist(name);
+    public Specialist addNewSpecialist(Specialist specialist) {
         specialistRepo.save(specialist);
         return specialist;
     }
@@ -48,13 +47,13 @@ public final class SpecialistServiceImpl implements SpecialistService {
 
 
     @Override
-    public String deleteSpecialistByName(String name){
-        Specialist specialist = specialistRepo.getSpecialistByName(name);
+    public String deleteSpecialistById(UUID id){
+        Specialist specialist = specialistRepo.getSpecialistById(id);
         if (specialist == null){
             return "Specialist is not found";
         }
         else
-            specialistRepo.deleteByName(name);
+            specialistRepo.delete(specialist);
             return "Specialist`s deleted";
     }
 
@@ -69,7 +68,7 @@ public final class SpecialistServiceImpl implements SpecialistService {
     }
 
     @Override
-    public Specialist getSprcialistById(UUID id) {
+    public Specialist getSpecialistById(UUID id) {
         Specialist specialist = specialistRepo.getSpecialistById(id);
         if (specialist == null){
             System.out.println("Specialist is not found");

@@ -4,6 +4,7 @@ package com.example.demo.service.model;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.text.ParseException;
@@ -17,6 +18,7 @@ import java.util.UUID;
 public final class Client {
     
     @Id
+    @GeneratedValue
     private  UUID id;
 
     private String name;

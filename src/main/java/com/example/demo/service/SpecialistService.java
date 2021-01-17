@@ -9,10 +9,11 @@ import java.util.UUID;
 
 @Service
 public interface SpecialistService {
-    Specialist addNewSpecialist(String name);
+    Specialist addNewSpecialist(Specialist specialist);
     Specialist getSpecialistByName(String name);
     List<Specialist> getSpecialists();
-    String deleteSpecialistByName(String name);
+    String deleteSpecialistById(UUID id);
     UUID getId(String name);
-    Specialist getSprcialistById(UUID id);
+    Specialist getSpecialistById(UUID id);
+
 }

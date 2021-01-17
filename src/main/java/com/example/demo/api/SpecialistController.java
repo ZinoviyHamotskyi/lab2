@@ -5,9 +5,11 @@ import com.example.demo.service.SpecialistService;
 import com.example.demo.service.model.Specialist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class SpecialistController {
@@ -24,17 +26,17 @@ public class SpecialistController {
     }
 
     @PostMapping(value = "/specialists")
-    public ResponseEntity<Specialist> addNewSpecialist(@RequestParam String name) {
-        return ResponseEntity.ok(specialistService.addNewSpecialist(name));
+    public ResponseEntity<Specialist> addNewSpecialist(@Validated @RequestBody Specialist specialist) {
+        return ResponseEntity.ok(specialistService.addNewSpecialist(specialist));
     }
 
-    @GetMapping(value = "/specialists/{name}")
-    public  ResponseEntity<Specialist> getSpecialistByName(@PathVariable(name = "name") String name){
-        return ResponseEntity.ok(specialistService.getSpecialistByName(name));
+    @GetMapping(value = "/specialists/{id}")
+    public  ResponseEntity<Specialist> getSpecialistByName(@PathVariable(name = "id") UUID id){
+        return ResponseEntity.ok(specialistService.getSpecialistById(id));
     }
 
-    @DeleteMapping(value = "/specialists/{name}")
-    public ResponseEntity<String> deleteSpecialistByName(@PathVariable(name = "name") String name) {
-        return ResponseEntity.ok(specialistService.deleteSpecialistByName(name));
+    @DeleteMapping(value = "/specialists/{id}")
+    public void deleteSpecialistByName(@PathVariable(name = "id") UUID id) {
+        System.out.println(specialistService.deleteSpecialistById(id));
     }
 }

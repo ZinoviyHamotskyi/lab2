@@ -8,7 +8,5 @@ import java.util.UUID;
 public interface ServiceRepo extends JpaRepository<Service, UUID> {
 
     Service getServiceByName(String serviceByName);
-    void deleteByName(String name);
-
     Service getServiceById(UUID id);
 }

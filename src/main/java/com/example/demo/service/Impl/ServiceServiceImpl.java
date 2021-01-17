@@ -18,8 +18,7 @@ public final class ServiceServiceImpl implements ServiceService {
         this.serviceRepo = serviceRepo;
     }
 
-    public Service addNewService(String name, double price){
-        Service service = new Service(name, price);
+    public Service addNewService(Service service){
         serviceRepo.save(service);
         return service;
     }
@@ -44,13 +43,13 @@ public final class ServiceServiceImpl implements ServiceService {
 
 
     @Override
-    public String deleteServiceByName(String name){
-        Service service = serviceRepo.getServiceByName(name);
+    public String deleteServiceById(UUID id){
+        Service service = serviceRepo.getServiceById(id);
         if (service == null){
             return "Service is not found";
         }
         else
-            serviceRepo.deleteByName(name);
+            serviceRepo.delete(service);
         return "Service`s deleted";
     }
 
